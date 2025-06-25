@@ -85,6 +85,10 @@
 		{
 			"Name": "MoviePipelineMaskRenderPass",
 			"Enabled": true
+		},
+		{
+			"Name": "HttpBlueprint",
+			"Enabled": true
 		}
 	]
 }
