@@ -94,7 +94,7 @@ TArray<FVector> UPoissonDiskSamplingUsingMesh::DoPoissonDiskSamplingUsingMesh(TA
 	
 	for (FVector& Point : Points)
 	{
-		UE_LOG(LogTemp, Warning, TEXT("Point: %s"), *Point.ToString());
+		// UE_LOG(LogTemp, Warning, TEXT("Point: %s"), *Point.ToString());
 
 		if (PointInMesh(Point, MeshVertices, MeshTriangles))
 		{
