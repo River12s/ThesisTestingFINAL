@@ -31,7 +31,7 @@ void ULLMResponseComplete::ULLMCallerfunctionComplete(FString Prompt, FOnLLMResp
 	FString OutputString1;
 	TSharedRef<TJsonWriter<>> Writer1 = TJsonWriterFactory<>::Create(&OutputString1);
 	FJsonSerializer::Serialize(MessageObj.ToSharedRef(), Writer1);
-	UE_LOG(LogTemp, Log, TEXT("MessageObj: %s"), *OutputString1);
+	//UE_LOG(LogTemp, Log, TEXT("MessageObj: %s"), *OutputString1);
 
 	//Wrap in Json and make it into an array
 	//TSharedPtr<FJsonValueObject> MessageValue = MakeShareable(new FJsonValueObject(MessageObj));
@@ -60,11 +60,11 @@ void ULLMResponseComplete::ULLMCallerfunctionComplete(FString Prompt, FOnLLMResp
 	Request->OnProcessRequestComplete().BindLambda(
 		 [ResponseDelegate](FHttpRequestPtr Request, FHttpResponsePtr Response, bool bWasSuccessful)
 		{
-		 	UE_LOG(LogTemp, Warning ,TEXT("In the thing"));
+		 	//UE_LOG(LogTemp, Warning ,TEXT("In the thing"));
 			if (!bWasSuccessful || !Response.IsValid())
 			{
 				FString Error = ("An error occured.");
-				UE_LOG(LogTemp, Error, TEXT("LLM request failed."));
+				//UE_LOG(LogTemp, Error, TEXT("LLM request failed."));
 				
 				if (ResponseDelegate.IsBound())
 				{
@@ -91,8 +91,8 @@ void ULLMResponseComplete::ULLMCallerfunctionComplete(FString Prompt, FOnLLMResp
 						FString Role = MessageObj2->GetStringField(TEXT("role"));
 						FString Content = MessageObj2->GetStringField(TEXT("content"));
 
-						UE_LOG(LogTemp, Display, TEXT("Role: %s"), *Role);
-						UE_LOG(LogTemp, Display, TEXT("LLM Response: %s"), *Content);
+						//UE_LOG(LogTemp, Display, TEXT("Role: %s"), *Role);
+						//UE_LOG(LogTemp, Display, TEXT("LLM Response: %s"), *Content);
 
 						TSharedPtr<FJsonObject> AssistantMessageObj = MakeShareable(new FJsonObject);
 						AssistantMessageObj->SetStringField(TEXT("role"), Role);
@@ -106,11 +106,11 @@ void ULLMResponseComplete::ULLMCallerfunctionComplete(FString Prompt, FOnLLMResp
 						TSharedRef<TJsonWriter<>> Writer2 = TJsonWriterFactory<>::Create(&OutputString);
 						if (FJsonSerializer::Serialize(TempRoot.ToSharedRef(), Writer2))
 						{
-							UE_LOG(LogTemp, Log, TEXT("MessagesArray JSON:\n%s"), *OutputString);
+							//UE_LOG(LogTemp, Log, TEXT("MessagesArray JSON:\n%s"), *OutputString);
 						}
 						else
 						{
-							UE_LOG(LogTemp, Error, TEXT("Failed to serialize MessagesArray."));
+							//UE_LOG(LogTemp, Error, TEXT("Failed to serialize MessagesArray."));
 						}
 
 						//for delegate 
@@ -124,7 +124,7 @@ void ULLMResponseComplete::ULLMCallerfunctionComplete(FString Prompt, FOnLLMResp
 			}
 		 	else
 		 	{
-		 		UE_LOG(LogTemp, Error, TEXT("Failed to deserialize response"));
+		 		//UE_LOG(LogTemp, Error, TEXT("Failed to deserialize response"));
 		 	}
 		}
 	);
